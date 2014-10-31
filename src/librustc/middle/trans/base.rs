@@ -1145,7 +1145,7 @@ pub fn call_memcpy(cx: Block, dst: ValueRef, src: ValueRef, n_bytes: ValueRef, a
     let key = match ccx.sess().target.target.target_word_size.as_slice() {
         "32" => "llvm.memcpy.p0i8.p0i8.i32",
         "64" => "llvm.memcpy.p0i8.p0i8.i64",
-        tws => fail!("Unsupported target word size for memcpy: {}", tws),
+        tws => panic!("Unsupported target word size for memcpy: {}", tws),
     };
     let memcpy = ccx.get_intrinsic(&key);
     let src_ptr = PointerCast(cx, src, Type::i8p(ccx));
@@ -1190,7 +1190,7 @@ fn memzero(b: &Builder, llptr: ValueRef, ty: ty::t) {
     let intrinsic_key = match ccx.sess().target.target.target_word_size.as_slice() {
         "32" => "llvm.memset.p0i8.i32",
         "64" => "llvm.memset.p0i8.i64",
-        tws => fail!("Unsupported target word size for memset: {}", tws),
+        tws => panic!("Unsupported target word size for memset: {}", tws),
     };
 
     let llintrinsicfn = ccx.get_intrinsic(&intrinsic_key);

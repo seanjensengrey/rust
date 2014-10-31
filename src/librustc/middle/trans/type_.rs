@@ -106,7 +106,7 @@ impl Type {
         match ccx.tcx().sess.target.target.target_word_size.as_slice() {
             "32" => Type::i32(ccx),
             "64" => Type::i64(ccx),
-            tws => fail!("Unsupported target word size for int: {}", tws),
+            tws => panic!("Unsupported target word size for int: {}", tws),
         }
     }
 
